@@ -20,7 +20,9 @@ POSTGRES_USER = getEnvVariable("POSTGRES_USER")
 POSTGRES_PW = getEnvVariable("POSTGRES_PW")
 POSTGRES_DB = getEnvVariable("POSTGRES_DB")
 
-DB_URL = f'postgresql://{POSTGRES_USER}:{POSTGRES_PW}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
+DB_URL = (f'postgresql://{POSTGRES_USER}:{POSTGRES_PW}'
+           '@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}')
+
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'HelloWorld'
