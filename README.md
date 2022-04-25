@@ -2,46 +2,15 @@
 
 This is a REST API application that returns an issues filtered by label
 
-## Installation
+# Create infrastructure
 
-### Install docker
-#### CentOS
-    sudo dnf update -y
-    sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-    sudo dnf install docker-ce
-    sudo systemctl start docker
-    sudo systemctl enable docker
+docker network create -d bridge kv126
+docker run --network=kv126 -d --name postgres -e POSTGRES_USER=dbuser -e POSTGRES_PASSWORD=dbpass postgres:14
+docker run --network=kv126 -d --name rabbit -e RABBITMQ_DEFAULT_USER=mquser -e RABBITMQ_DEFAULT_PASS=mqpass -p 15672:15672 rabbitmq:3.9-management
 
-### Install Git
-#### CentOS
-    sudo dnf install git -y
-### Create network
-    sudo docker network create --driver bridge --subnet 10.0.1.0/24 --ip-range 10.0.1.0/24 bridge_issue
+# Run rest-api (port 8080)
 
-### Create projects folder
-    mkdir /home/projectIssues
-    cd /home/projectIssues
-
-### Clone RestAPI project
-    git init
-    sudo git clone https://github.com/Kv-DevOps-094/rest-api.git /home/projectIssues/restapi
-    sudo git clone -b develop https://github.com/Kv-DevOps-094/rabbit-to-bd.git /home/projectIssues/rabbit-to-bd
-
-### Copy service files to:
-    cp -f /home/projectIssues/restapi/docker.postgres.service /etc/systemd/system/
-    cp -f /home/projectIssues/restapi/docker.rabbit_to_db.service /etc/systemd/system/
-    cp -f /home/projectIssues/restapi/docker.restapi.service /etc/systemd/system/
-
-### Create RestAPI container
-    sudo docker build --tag="resrapi" /home/projectIssues/restapi/
-    sudo docker build --tag="rabbit_to_postgres" /home/projectIssues/rabbit-to-bd/
-### Start services
-    systemctl daemon-reload
-    sudo service docker.postgres start
-    sudo service docker.restapi start
-    sudo service docker.rabbit_to_db start
-####
-    sudo service docker.postgres stop
-    sudo service docker.restapi stop
-    sudo service docker.rabbit_to_db stop
-
+git clone --branch develop https://github.com/Kv-126-DevOps/rest-api.git /opt/rest-api
+docker run --network=kv126 -d --name rest-api -v /opt/rest-api:/app -p 8080:5000 python:3.9-slim sleep infinity
+docker exec rest-api pip install -r /app/requirements.txt
+docker exec -e POSTGRES_HOST=postgres -e POSTGRES_PORT=5432 -e POSTGRES_USER=dbuser -e POSTGRES_PASS=dbpass -e POSTGRES_DB=postgres -d rest-api bash -c "cd /app && flask run --host=0.0.0.0"
