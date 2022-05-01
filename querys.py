@@ -1,19 +1,21 @@
 from flask import jsonify
 from sqlalchemy import func
-from db import session
+from db import session_factory
 from models import *
+
+session = session_factory()
 
 
 def getIssuesByLabelQuery(label: str):
     """
-    The function for Selecting Issues and filtering by Label from the db.
+    The function of Select Issues and filtering by Label from the db.
     :param label: for filtering issues
     :return: list of Issue from db
     """
 
     label = str.lower(label)
 
-    result = session.query(
+    query = session.query(
         Issue.IssueId.label("IssueId"),
         State.Title.label("State"),
         Issue.Title.label("Issue"),
@@ -46,15 +48,15 @@ def getIssuesByLabelQuery(label: str):
             'UserAvatarUrl': item.UserAvatarUrl,
             'ModifiedDate': item.ModifiedDate,
             'Action': item.Action,
-        } for item in result])
+        } for item in query])
 
 
 def getIssuesByIdQuery(issueId):
     """
-    The function for Selecting Issues and filtering by IssueId from the db.
+    The function of Select Issues and filtering by IssueId from the db.
     :return: list of Issue from db
     """
-    result = session.query(
+    query = session.query(
         Issue.IssueId.label("IssueId"),
         State.Title.label("State"),
         Issue.Title.label("Issue"),
@@ -87,7 +89,7 @@ def getIssuesByIdQuery(issueId):
             'UserAvatarUrl': item.UserAvatarUrl,
             'ModifiedDate': item.ModifiedDate,
             'Action': item.Action,
-        } for item in result])
+        } for item in query])
 
 
 def getLabelsQuery():
@@ -96,12 +98,12 @@ def getLabelsQuery():
     :return: list of Label from db
     """
 
-    result = session.query(Label).all()
+    query = session.query(Label).all()
     return jsonify([
         {
             'LabelId': item.LabelId,
             'Title': item.Title,
-        } for item in result])
+        } for item in query])
 
 
 def getStatesQuery():
@@ -109,12 +111,12 @@ def getStatesQuery():
     The function of Select States from the db.
     :return: list of State from db
     """
-    result = session.query(State).all()
+    query = session.query(State).all()
     return jsonify([
         {
             'StateId': item.StateId,
             'Title': item.Title,
-        } for item in result])
+        } for item in query])
 
 
 def getActionsQuery():
@@ -122,12 +124,12 @@ def getActionsQuery():
     The function of Select Actions from the db.
     :return: list of Action from db
     """
-    result = session.query(Action).all()
+    query = session.query(Action).all()
     return jsonify([
         {
             'ActionId': item.ActionId,
             'Title': item.Title,
-        } for item in result])
+        } for item in query])
 
 
 def getUsersQuery():
@@ -136,13 +138,13 @@ def getUsersQuery():
     :return: list of User from db
     """
 
-    result = session.query(User).all()
+    query = session.query(User).all()
     return jsonify([
         {
             'UserId': item.UserId,
             'HtmlUrl': item.HtmlUrl,
             'AvatarUrl': item.AvatarUrl,
-        } for item in result])
+        } for item in query])
 
 
 def getIssuesQuery():
@@ -150,7 +152,7 @@ def getIssuesQuery():
     The function of Select Issues from the db.
     :return: list of Issue from db
     """
-    result = session.query(Issue).all()
+    query = session.query(Issue).all()
     return jsonify([
         {
             'IssueId': item.IssueId,
@@ -158,4 +160,4 @@ def getIssuesQuery():
             'Number': item.Number,
             'Title': item.Title,
             'Body': item.Body,
-        } for item in result])
+        } for item in query])
