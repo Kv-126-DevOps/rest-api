@@ -44,3 +44,10 @@ def getUsers():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+@app.route("/", methods=['GET'])
+@app.route("/hello/", methods=['GET'])
+def getSlavik():
+    return "hello"
