@@ -46,8 +46,7 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-
 @app.route("/", methods=['GET'])
-@app.route("/hello/", methods=['GET'])
-def getSlavik():
-    return "hello"
+@app.route("/Hello-Kv-126-DevOps/", methods=['GET'])
+def getTestIssue():
+    return "HELLO FOR EVERYONE!!! \n This is rest-api test without database."
