@@ -36,7 +36,7 @@ This is a REST API application that returns an issues filtered by label
 1. Clone the repository and go to the application folder
 
     ```bash
-    git clone --branch 1-rabbit-to-db-code-refactoring https://github.com/Kv-126-DevOps/rabbit-to-db.git /opt/rabbit-to-db
+    git clone --branch 1-rabbit-to-bd-code-refactoring https://github.com/Kv-126-DevOps/rabbit-to-db.git /opt/rabbit-to-db
     ```
 
 2. Run Rabbit-to-db container with "kv126" network
@@ -68,13 +68,13 @@ This is a REST API application that returns an issues filtered by label
 2. Run REST-APi container with "kv126" network
 
     ```bash
-    docker run --network=kv126  -d --name rest-api -e POSTGRES_HOST=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres) -e POSTGRES_PORT=5432 -e POSTGRES_USER=dbuser -e POSTGRES_PASS=dbpass -e POSTGRES_DB=postgres -v /opt/rest-api:/app -p 8080:5000 python:3.9-slim sleep infinity
+    docker run --network=kv126  -d --name rest-api -e POSTGRES_HOST=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres) -e POSTGRES_PORT=5432 -e POSTGRES_USER=dbuser -e POSTGRES_PASS=dbpass -e POSTGRES_DB=postgres -v /opt/rest-api:/home/docker-user/app -p 8080:5000 python:3.9-slim sleep infinity
     ```
 
 3. Install all required python packages
 
    ```bash
-   docker exec rest-api pip install -r /app/requirements.txt
+   docker exec rest-api pip install -r /home/docker-user/app/requirements.txt
    ```
 4. Run the application
 
@@ -86,13 +86,13 @@ This is a REST API application that returns an issues filtered by label
 
 Parameters are set as environment variables
 
-| Parameter     | Default      | Description         |
-|:--------------|:-------------|:--------------------|
-| POSTGRES_HOST | None         | PostgreSQL host     |
-| POSTGRES_PORT | None         | PostgreSQL port     |
-| POSTGRES_USER | None         | PostgreSQL user     |
-| POSTGRES_PASS | None         | PostgreSQL password |
-| POSTGRES_DB   | None         | PostgreSQL database |
+| Parameter     | Default          | Description         |
+|:--------------|:-----------------|:--------------------|
+| POSTGRES_HOST | None             | PostgreSQL host     |
+| POSTGRES_PORT | 5432             | PostgreSQL port     |
+| POSTGRES_USER | None             | PostgreSQL user     |
+| POSTGRES_PASS | None             | PostgreSQL password |
+| POSTGRES_DB   | postgres         | PostgreSQL database |
 
 ## Testing
 
