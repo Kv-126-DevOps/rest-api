@@ -62,24 +62,24 @@ This is a REST API application that returns an issues filtered by label
 1. Clone the repository and go to the application folder
 
    ```bash
-   git clone --branch 14-rest-api-code-refactoring https://github.com/Kv-126-DevOps/rest-api.git /opt/rest-api
+   sudo git clone --branch 14-rest-api-code-refactoring https://github.com/Kv-126-DevOps/rest-api.git /opt/rest-api
    ```
 
 2. Run REST-APi container with "kv126" network
 
     ```bash
-    docker run --network=kv126  -d --name rest-api -e POSTGRES_HOST=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres) -e POSTGRES_PORT=5432 -e POSTGRES_USER=dbuser -e POSTGRES_PASS=dbpass -e POSTGRES_DB=postgres -v /opt/rest-api:/home/docker-user/app -p 8080:5000 python:3.9-slim sleep infinity
+    docker run --network=kv126  -d --name rest-api -e POSTGRES_HOST=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres) -e POSTGRES_PORT=5432 -e POSTGRES_USER=dbuser -e POSTGRES_PASS=dbpass -e POSTGRES_DB=postgres -v /opt/rest-api:/home/app-user/app -p 8080:5000 python:3.9-slim sleep infinity
     ```
 
 3. Install all required python packages
 
    ```bash
-   docker exec rest-api pip install -r /home/docker-user/app/requirements.txt
+   docker exec rest-api pip install -r /home/app-user/app/requirements.txt
    ```
 4. Run the application
 
    ```bash
-   docker exec -d rest-api bash -c "cd /app && flask run --host=0.0.0.0"
+   docker exec -d rest-api bash -c "cd /home/app-user/app && flask run --host=0.0.0.0"
    ```
 
 ### REST-API Application Properties
