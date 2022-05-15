@@ -19,7 +19,9 @@ class User(Base):
         self.AvatarUrl = AvatarUrl
 
     def __repr__(self):
-        return f"UserId: {self.UserId}, HtmlUrl: {self.HtmlUrl}, AvatarUrl: {self.AvatarUrl}"
+        return f"UserId: {self.UserId}, " \
+               f"HtmlUrl: {self.HtmlUrl}, " \
+               f"AvatarUrl: {self.AvatarUrl}"
 
 
 class IssueAction(Base):
@@ -126,4 +128,6 @@ class IssueState(Base):
         self.ModifiedDate = ModifiedDate
 
     def __repr__(self):
-        return f"IssueId: {self.IssueId}, StateId: {self.StateId}, ModifiedDate: {self.ModifiedDate}"
+        return f"IssueId: {self.IssueId},  " \
+               f"StateId: {self.StateId}, " \
+               f"ModifiedDate: {self.ModifiedDate}"

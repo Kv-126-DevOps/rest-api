@@ -9,7 +9,6 @@ session = session_factory()
 def getIssuesByLabelQuery(label: str):
     """
     The function of Select Issues and filtering by Label from the db.
-
     :param label: for filtering issues
     :return: list of Issue from db
     """
@@ -55,7 +54,6 @@ def getIssuesByLabelQuery(label: str):
 def getIssuesByIdQuery(issueId):
     """
     The function of Select Issues and filtering by IssueId from the db.
-
     :return: list of Issue from db
     """
     query = session.query(
@@ -97,7 +95,6 @@ def getIssuesByIdQuery(issueId):
 def getLabelsQuery():
     """
     The function of Select Labels from the db.
-
     :return: list of Label from db
     """
 
@@ -112,7 +109,6 @@ def getLabelsQuery():
 def getStatesQuery():
     """
     The function of Select States from the db.
-
     :return: list of State from db
     """
     query = session.query(State).all()
@@ -126,7 +122,6 @@ def getStatesQuery():
 def getActionsQuery():
     """
     The function of Select Actions from the db.
-
     :return: list of Action from db
     """
     query = session.query(Action).all()
@@ -140,7 +135,6 @@ def getActionsQuery():
 def getUsersQuery():
     """
     The function of Select Users from the db.
-
     :return: list of User from db
     """
 
@@ -156,7 +150,6 @@ def getUsersQuery():
 def getIssuesQuery():
     """
     The function of Select Issues from the db.
-
     :return: list of Issue from db
     """
     query = session.query(Issue).all()

@@ -1,5 +1,5 @@
 GET - /issues/by-label/<label> - Get issues by label
-http://127.0.0.1:5000/issues/by-label/Bug%20report
+http://127.0.0.1:8080/issues/by-label/Bug%20report
 [
   {
     "Action": "opened",
@@ -16,7 +16,7 @@ http://127.0.0.1:5000/issues/by-label/Bug%20report
 ]
 
 GET - /issues/ - Get all issues
-http://127.0.0.1:5000/issues/
+http://127.0.0.1:8080/issues/
 [
   {
     "Body": "Comment here",
@@ -28,7 +28,7 @@ http://127.0.0.1:5000/issues/
 ]
 
 GET - /issues/by-id/<int:id> - Get issues by id
-http://127.0.0.1:5000/issues/by-id/944298295
+http://127.0.0.1:8080/issues/by-id/944298295
 [
   {
     "Action": "opened",
@@ -44,7 +44,7 @@ http://127.0.0.1:5000/issues/by-id/944298295
 ]
 
 GET - /labels/ - Get all labels
-http://127.0.0.1:5000/labels/
+http://127.0.0.1:8080/labels/
 [
   {
     "LabelId": 1,
@@ -54,7 +54,7 @@ http://127.0.0.1:5000/labels/
 
 
 GET - /states/ - Get all states
-http://127.0.0.1:5000/states/
+http://127.0.0.1:8080/states/
 [
   {
     "StateId": 1,
@@ -64,7 +64,7 @@ http://127.0.0.1:5000/states/
 
 
 GET - /actions/ - Get all actions
-http://127.0.0.1:5000/actions/
+http://127.0.0.1:8080/actions/
 [
   {
     "ActionId": 1,
@@ -74,7 +74,7 @@ http://127.0.0.1:5000/actions/
 
 
 GET - /users/ - Get all users
-http://127.0.0.1:5000/users/
+http://127.0.0.1:8080/users/
 [
   {
     "AvatarUrl": "https://avatars.githubusercontent.com/u/54399719?v=4",
@@ -84,4 +84,5 @@ http://127.0.0.1:5000/users/
 ]
 
 
-
+GET - /Hello-Kv-126-DevOps/ - Get hello text
+http://127.0.0.1:8080/Hello-Kv-126-DevOps/

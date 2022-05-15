@@ -44,3 +44,9 @@ def getUsers():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+@app.route("/", methods=['GET'])
+@app.route("/Hello-Kv-126-DevOps/", methods=['GET'])
+def getTestIssue():
+    return "GET query | Rest-api | Kv-126-DevOps | code: 200"

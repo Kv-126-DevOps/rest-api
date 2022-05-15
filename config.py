@@ -15,12 +15,14 @@ def getEnvVariable(name):
 
 
 POSTGRES_HOST = getEnvVariable("POSTGRES_HOST")
-POSTGRES_PORT = getEnvVariable("POSTGRES_PORT")
+POSTGRES_PORT = os.environ.get('POSTGRES_PORT', 5432)
 POSTGRES_USER = getEnvVariable("POSTGRES_USER")
-POSTGRES_PW = getEnvVariable("POSTGRES_PW")
-POSTGRES_DB = getEnvVariable("POSTGRES_DB")
+POSTGRES_PASS = getEnvVariable("POSTGRES_PASS")
+POSTGRES_DB = os.environ.get('POSTGRES_DB', 'postgres')
 
-DB_URL = f'postgresql://{POSTGRES_USER}:{POSTGRES_PW}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
+DB_URL = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASS}@' \
+         f'{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
+
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'HelloWorld'
