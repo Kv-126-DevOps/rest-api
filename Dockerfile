@@ -1,6 +1,15 @@
 FROM python:3.9-slim
-RUN groupadd -g 999 app-user && useradd -r -u 999 -g app-user app-user
-USER app-user
-WORKDIR /home/app-user/app
-RUN pip3 install -r /home/app-user/app/requirements.txt
+
+RUN useradd -ms /bin/bash kvuser
+USER kvuser
+WORKDIR /home/kvuser
+
+ENV PATH="/home/kvuser/.local/bin:${PATH}"
+
+COPY --chown=kvuser:kvuser requirements.txt requirements.txt
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install --user -r requirements.txt
+
+COPY --chown=kvuser:kvuser . .
+
 CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0"]
